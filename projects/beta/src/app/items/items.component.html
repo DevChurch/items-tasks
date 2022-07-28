@@ -1,0 +1,41 @@
+
+  <div fxLayout="row" class="header" fxLayoutAlign="space-between center">
+    <div class="dot">find</div>
+  </div>
+  <div fxLayout="column" ftxLayoutAlign="center center">  
+    <div fxLayoutAlign="center" > 
+        <form class="item-form" fxLayoutAlign="center" >
+        <mat-form-field class="item-full-width" appearance="fill" >
+          <mat-label>Search DB</mat-label>
+          <input #matInput type="text"
+                 placeholder="Enter Text"
+                 aria-label="Enter Text"
+                 matInput
+                 [formControl]="autoCompleteControl"
+                 [matAutocomplete]="auto" 
+                 (keyup.enter)="onAutoCompleteSelected(matInput.value)" >
+          <mat-autocomplete #auto="matAutocomplete"   [panelWidth]="499" class="vscroller"  (optionSelected)='onAutoCompleteSelected($event.option.value)'>
+            <mat-option *ngFor="let option of filteredAutoSuggestions" [value]="option">           
+                  {{option}}
+              </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>   
+    </div>
+  </div>
+  <div fxLayout="row" class="header" fxLayoutAlign="space-between center">
+  </div>
+  <div fxLayout="column" ftxLayoutAlign="center center"  *ngIf="filteredResultList$ | async as filteredResultList">
+    <div fxLayoutAlign="center" >
+  <cdk-virtual-scroll-viewport [itemSize]="itemSize" class="scroll-viewport cdk-virtual-scroll-viewport viewport vscroller cdk-virtual-scroll-orientation-vertical">
+    <div *cdkVirtualFor="let item of filteredResultList.Items" (click)="onlistItemSelected(item.IntCode)"
+         [style.height]="itemSize + 'px'" fxlayoutalign="start center" class="list-row item ng-star-inserted">
+         
+         <div  fxflex="1rem" class="separator"></div>
+         <img class="image" src ='{{item.ImageURL}}'/> 
+         <div fxflex="1rem" class="separator"></div>
+         <span class="title" fxlayoutalign="center">{{item.TapeLabel}}</span></div>
+        
+  </cdk-virtual-scroll-viewport>
+  </div>   
+</div>

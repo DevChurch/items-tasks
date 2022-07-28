@@ -1,0 +1,39 @@
+.item-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+.item-full-width {
+    width: 100%;
+  }
+.scroll-viewport {
+  width: 95%;
+  max-width: 499px;
+  height: 576px;
+}
+.image{
+  width: 40px;
+    height: 34px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+.title
+{
+  color: #a9c;
+  cursor: pointer;
+  font-weight: 500;
+}
+.separator
+{
+  flex: 1 1 1rem;
+  box-sizing: border-box;
+  max-width: 1rem;
+  min-width: 1rem;
+}
+.list-row{
+  flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center flex-start;
+    align-items: center;
+}

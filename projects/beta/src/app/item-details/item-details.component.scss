@@ -1,0 +1,56 @@
+@import "vhap";
+
+.item{
+    max-width: 80vw;
+    font-size: .75rem;
+}
+
+.image{
+    width: 320px;
+    height: 240px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    object-fit: cover;
+}
+.separator{
+    flex: 1 1 0.5rem; box-sizing: border-box; max-height: 0.5rem; min-height: 0.5rem;
+}
+.lite{
+    color: #a9c;
+    width: 320px;
+    font-size: .75rem;
+    font-weight: 500;
+}
+.nowrap {
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.heavy {
+    font-size: .85rem;
+    font-weight: 700;
+    text-decoration: underline;
+}
+.title{
+    width: 75%;
+}
+.right{
+text-align: right;
+width: 25%;
+}
+.left{
+text-align: left;
+ }
+ .flex{
+    display: flex;
+ }
+ .item-footer{
+    text-align: right;
+    width: 100%;
+    font-size: .75rem;
+ }
+ .title-header{
+    color: #a9c;
+    margin-left: 3px;
+ }

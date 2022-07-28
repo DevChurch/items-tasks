@@ -1,0 +1,20 @@
+<div *ngIf="item" fxlayout="column" fxlayoutalign="start center" class="item" >
+<img  fxflex="240px" class="image" src={{item.ImageURL}} >
+<div  fxflex=".5rem" class="separator"></div>
+<div fxlayout="row" fxlayoutalign="start center flex" class="row flex" >
+    <div fxlayout="auto" class="title heavy nowrap">{{item.TapeLabel}}</div>   
+    <div class="right">{{item.Length}}</div>
+</div>
+<div fxlayout="row" fxlayoutalign="start center " class="flex"  >
+    <div fxflex="auto" class="nowrap title">{{item.OrganizationName}}</div>    
+    <div class="right">{{item.LanguageLabel}}</div>
+</div>
+<div  fxflex=".5rem" class="separator"></div>
+<div fxlayout="row" fxlayoutalign="start center" class="lite">
+    {{item.GrantStatement}}
+</div>
+<div  fxflex=".5rem" class="separator"></div>
+<div  fxlayout="row" fxlayoutalign="end center " class="flex" >
+    <div class="item-footer">{{item.ExperienceGroup}}</div>
+</div>
+</div>
