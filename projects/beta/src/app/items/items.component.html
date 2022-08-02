@@ -15,7 +15,7 @@
                  [matAutocomplete]="auto" 
                  (keyup.enter)="onAutoCompleteSelected(matInput.value)" >
           <mat-autocomplete #auto="matAutocomplete"   [panelWidth]="499" class="vscroller"  (optionSelected)='onAutoCompleteSelected($event.option.value)'>
-            <mat-option *ngFor="let option of filteredAutoSuggestions" [value]="option">           
+            <mat-option *ngFor="let option of (filteredAutoSuggestions$ | async)?.Items" [value]="option">           
                   {{option}}
               </mat-option>
           </mat-autocomplete>

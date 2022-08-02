@@ -5,7 +5,7 @@ import { Client, CLIENT_TOKEN } from 'projects/vhap/src/public-api';
 import {Observable} from 'rxjs';
 import {finalize, map, startWith,switchMap,tap,filter,debounceTime,distinctUntilChanged} from 'rxjs/operators';
 import { BetaService } from '../beta.service';
-import { Items } from '../model';
+import { AutoCompleteItems, Items } from '../model';
 import { ViewChild } from '@angular/core';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import {MatDialog} from '@angular/material/dialog';
@@ -18,10 +18,10 @@ import { ItemDetailsComponent } from '../item-details/item-details.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ItemsComponent{
+export class ItemsComponent implements OnInit{
   @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger | undefined;
   autoCompleteControl = new FormControl('');
-  filteredAutoSuggestions: string[] = [];
+  filteredAutoSuggestions$: Observable<AutoCompleteItems> | undefined  ;
   filteredResultList$ : Observable<Items> | undefined ;
   errorMsg!: string;
   selectedItem: any = "";
@@ -34,24 +34,18 @@ export class ItemsComponent{
     public dialog: MatDialog
   ) {
 
-    this.autoCompleteControl.valueChanges.pipe(distinctUntilChanged(),
-       debounceTime(500)).
-       subscribe(value => {       
-        if(value)
-        {
-           this.betaService.getSearchAutoSuggests(value.toLocaleLowerCase(),30).subscribe(data => {
-              if (data['Items'] == undefined) {                 
-                this.errorMsg = "error";
-                this.filteredAutoSuggestions =[];
-                  } else {
-                    this.errorMsg = "";
-                    this.filteredAutoSuggestions = data.Items;                   
-                }
-              });    
-        }
-       }
-       );
+  
     
+  }
+  ngOnInit(): void {
+    const observValue = this.autoCompleteControl.valueChanges as Observable<any>;
+    this.filteredAutoSuggestions$ =observValue.pipe(distinctUntilChanged(),debounceTime(500),    
+    switchMap((name: string)=> {
+    return this.betaService.getSearchAutoSuggests(name.toLocaleLowerCase(), 30);
+  }
+  )
+  );
+
   }
 
 
